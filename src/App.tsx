@@ -1,23 +1,26 @@
-import { foods } from "./food";
+import { Link, Route, Routes } from "react-router-dom";
+import Admin from "./Admin";
+import Menu from "./Menu";
 
 // Excercise:
-// Create a navigation bar with a home link (/) and a admin link (/admin)
 const App = () => (
-  <>
+  <main>
     <h1 className="text-3xl font-bold underline">React Restaurant</h1>
-    <div className="flex flex-wrap">
-      {foods.map((food) => {
-        return (
-          <div className="hover:bg-indigo-600 hover:text-white p-2 shadow-lg border max-w-sm m-2 rounded">
-            <h2 className="text-lg font-bold">{food.name}</h2>
-            <img src={"/images/"+food.image} className="h-52" alt={food.name} />
-            <p>{food.description}</p>
-            <p>${food.price}</p>
-          </div>
-        );
-      })}
-    </div>
-  </>
+    <nav className="bg-indigo-100 p-2">
+      <ul className="flex">
+        <li className="mr-2">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="mr-2">
+        <Link to="/admin">Admin</Link>
+        </li>
+      </ul>
+    </nav>
+    <Routes>
+      <Route path="/" element={<Menu/>}/>
+      <Route path="/Admin" element={<Admin/>}/>
+    </Routes>
+  </main>
 );
 
 export default App;
