@@ -4,7 +4,7 @@ import Menu from "./Menu";
 
 // Excercise:
 const App = () => (
-  <main>
+  <>
     <h1 className="text-3xl font-bold underline">React Restaurant</h1>
     <nav className="bg-indigo-100 p-2">
       <ul className="flex">
@@ -20,7 +20,7 @@ const App = () => (
       <Route path="/" element={<Menu/>}/>
       <Route path="/Admin" element={<Admin/>}/>
     </Routes>
-  </main>
+  </>
 );
 
 export default App;
