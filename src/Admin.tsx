@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import {foodTags, NewFood } from "./food";
+import { addFood } from "./services/foodsApi";
 import Button from "./shared/Button";
 import Checkbox from "./shared/Checkbox";
 import CheckboxList from "./shared/CheckboxList";
@@ -24,8 +26,11 @@ const Admin = () => {
     //React injects the current state value when a function is passed
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
+    await addFood(food);
+    toast.success("Food added!👌");
+    setFood(emptyFood);
   } 
 
   return (

@@ -7,7 +7,7 @@ export async function getFoods(): Promise<Food[]>
     return resp.json()
 }
 
-export async function addFoods(food:NewFood): Promise<Food>
+export async function addFood(food:NewFood): Promise<Food>
 {
     const resp = await fetch(url,{
         method:"POST",
