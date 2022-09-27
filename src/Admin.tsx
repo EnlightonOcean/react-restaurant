@@ -12,6 +12,7 @@ const Admin = () => (
       <Input id="Name" label="Name" className="my-4"></Input>
       <Input id="Description" label="Description" className="my-4"></Input>
       <Input id="Price" label="Price" type="number" className="my-4"></Input>
+      <Input id="image" label="Image filename" className="my-4"></Input>
       <CheckboxList label="Tags">
         {foodTags.map((tag) => (
           <Checkbox key={tag} id={tag} label={tag} />
