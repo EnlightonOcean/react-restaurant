@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Food, foodTags } from "./food";
+import {foodTags, NewFood } from "./food";
 import Button from "./shared/Button";
 import Checkbox from "./shared/Checkbox";
 import CheckboxList from "./shared/CheckboxList";
 import Heading from "./shared/Heading";
 import Input from "./shared/Input";
 
-const emptyFood: Food = {
+
+const emptyFood: NewFood = {
   name: "",
   image: "",
   price: 0,
@@ -23,12 +24,15 @@ const Admin = () => {
     //React injects the current state value when a function is passed
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+  } 
 
   return (
     <>
       {/* <h1>Admin</h1> */}
       <Heading level={2}>Admin</Heading>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         {/* <Input id="Name" label="Name" className="my-4" onChange={onInputChange} value={food.name}></Input> */}
         <Input
           id="name"

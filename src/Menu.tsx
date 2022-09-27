@@ -1,7 +1,27 @@
-import { foods } from "./food";
+import { useEffect, useState } from "react";
+import { Food } from "./food";
+import { getFoods } from "./services/foodsApi";
 import Heading from "./shared/Heading";
 
-const Menu = () => (
+const Menu = () => {
+  const[foods, setFoods] = useState<Food[]>([])
+  
+  useEffect(() => {
+
+    async function fetchFoods(){
+      // const resp = await fetch("http://localhost:3001/foods");
+      // const data = await resp.json()
+      setFoods( await getFoods());
+      //debugger;
+      //setFoods(data);
+      //debugger;
+    }
+
+    fetchFoods();
+
+  },[]);
+  
+  return (
   <>
     <Heading level={2}>Menu</Heading>
     <div className="flex flex-wrap">
@@ -26,5 +46,6 @@ const Menu = () => (
     </div>
   </>
 );
+    }
 
 export default Menu;
