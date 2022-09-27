@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "./Error";
 
 type InputProps = {
   className?: string;
@@ -7,6 +8,7 @@ type InputProps = {
   type?: "text" | "number" | "email" | "password" | "tel";
   value?: string;
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?:string;
 };
 
 const Input = ({
@@ -15,7 +17,8 @@ const Input = ({
   type = "text",
   className = "",
   value,
-  onChange
+  onChange,
+  error
 }: InputProps) => (
   <div className={className}>
     <label className="block" htmlFor={id}>
@@ -28,6 +31,7 @@ const Input = ({
       value={value}
       onChange = {onChange}
     />
+    {error &&  <Error error={error} />}
   </div>
 );
 

@@ -17,8 +17,17 @@ const emptyFood: NewFood = {
   tags: [],
 };
 
+export type Errors = {
+  name?: string;
+  image?: string;
+  price?: string;
+  description?: string;
+  tags?:string;
+};
+
 const Admin = () => {
   const [food, setFood] = useState(emptyFood);
+  const [errors,setErrors] = useState<Errors>({});
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -26,8 +35,32 @@ const Admin = () => {
     //React injects the current state value when a function is passed
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
+
+  const validate = () => {
+    const newErrors: Errors = {};
+    if (!food.name) {
+      newErrors.name = "Name is required";
+    }
+    if (!food.image) {
+      newErrors.image = "Image is required";
+    }
+    if (!food.price) {
+      newErrors.price = "Price is required";
+    }
+    if (!food.description) {
+      newErrors.description = "Description is required";
+    }
+    if (food.tags.length === 0) {
+      newErrors.tags = "At least one tag is required";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
+    const isValid = validate();
+    if(!isValid) return;
     await addFood(food);
     toast.success("Food added!👌");
     setFood(emptyFood);
@@ -45,6 +78,7 @@ const Admin = () => {
           className="my-4"
           onChange={onInputChange}
           value={food.name}
+          error = {errors.name}
         ></Input>
         <Input
           id="description"
@@ -52,6 +86,7 @@ const Admin = () => {
           className="my-4"
           onChange={onInputChange}
           value={food.description}
+          error = {errors.description}
         ></Input>
         <Input
           id="price"
@@ -60,6 +95,7 @@ const Admin = () => {
           className="my-4"
           onChange={onInputChange}
           value={food.price.toString()}
+          error = {errors.price}
         ></Input>
         <Input
           id="image"
@@ -67,8 +103,9 @@ const Admin = () => {
           className="my-4"
           onChange={onInputChange}
           value={food.image}
+          error = {errors.image}
         ></Input>
-        <CheckboxList label="Tags">
+        <CheckboxList label="Tags" error={errors.tags}>
           {foodTags.map((tag) => (
             <Checkbox
               key={tag}

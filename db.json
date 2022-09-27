@@ -225,39 +225,6 @@
         "Dinner",
         "Vegetarian"
       ]
-    },
-    {
-      "name": "Hello",
-      "image": "Lunch",
-      "price": "3",
-      "description": "sds",
-      "tags": [
-        "Lunch",
-        "Dinner"
-      ],
-      "id": 22
-    },
-    {
-      "name": "Hello",
-      "image": "Lunch",
-      "price": "3",
-      "description": "sds",
-      "tags": [
-        "Lunch",
-        "Dinner"
-      ],
-      "id": 23
-    },
-    {
-      "name": "Hello",
-      "image": "Lunch",
-      "price": "3",
-      "description": "sds",
-      "tags": [
-        "Lunch",
-        "Dinner"
-      ],
-      "id": 24
     }
   ]
 }
