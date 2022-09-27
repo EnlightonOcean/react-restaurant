@@ -20,7 +20,7 @@ const Checkbox = ({
       type="checkbox"
       value={value}
     />
-    <label className="block" htmlFor={id}>
+    <label className="ml-1" htmlFor={id}>
       {label}
     </label>
   </div>

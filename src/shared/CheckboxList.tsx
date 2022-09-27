@@ -1,13 +1,15 @@
 import Checkbox from "./Checkbox";
 
 type CheckboxListProps = {
+    label:string;
     className?: string;
     children: React.ReactNode;
 };
 
-const CheckboxList = ({ children,className="" }: CheckboxListProps) => (
-  <div className={className}>
+const CheckboxList = ({ children,className="",label }: CheckboxListProps) => (
+  <fieldset className={className}>
+    <legend>{label}</legend>
     {children}
-  </div>
+  </fieldset>
 );
 export default CheckboxList;
