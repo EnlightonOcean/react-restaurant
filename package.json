@@ -11,7 +11,9 @@
     "start-api": "json-server --watch db.json --port 3001",
     "test": "vitest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "cy":"start-test 5173 cy:open",
+    "cy:open" :"cypress open"
   },
   "dependencies": {
     "clsx": "^1.2.1",

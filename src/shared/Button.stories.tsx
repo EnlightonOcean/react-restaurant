@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import  Button  from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -32,8 +31,8 @@ export const Secondary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 //setting props
-Secondary.args = {
-    variant : "secondary",
+Primary.args = {
+    variant : "primary",
     children: "Click me",
   className : "custom-class"
 };

@@ -1,9 +1,14 @@
-import Button from './Button';
+import * as stories from './Button.stories';
+import { composeStories } from '@storybook/testing-react';
 import {render,screen} from '@testing-library/react';
+import Button from './Button';
+
+const { Primary } = composeStories(stories);
+
 
 describe("Button",() =>{
    it("should render children",() => {
-    const {getByRole} = render (<Button type="button" variant='primary'>Click me</Button>);
+    const {getByRole} = render (<Primary />);
     //expect(getByRole("button",{ name: "Click me"})).toBeInTheDocument();
     getByRole("button",{ name: "Click me"});
    }) ;
