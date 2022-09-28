@@ -9,6 +9,7 @@ type InputProps = {
   value?: string;
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   error?:string;
+  onBlur?:(event: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({
@@ -18,7 +19,8 @@ const Input = ({
   className = "",
   value,
   onChange,
-  error
+  error,
+  onBlur
 }: InputProps) => (
   <div className={className}>
     <label className="block" htmlFor={id}>
@@ -30,6 +32,7 @@ const Input = ({
       type={type}
       value={value}
       onChange = {onChange}
+      onBlur = {onBlur}
     />
     {error &&  <Error error={error} />}
   </div>
