@@ -34,6 +34,7 @@ export type Touched = {
 
 type FormStatus = "idle" | "submitting" | "submitted" | "error";
 
+
 const Admin = () => {
   const [food, setFood] = useState(emptyFood);
   const [touched, setTouched] = useState<Touched>({});
@@ -53,7 +54,7 @@ const Admin = () => {
       newErrors.name = "Name is required";
     }
     if (!food.image) {
-      newErrors.image = "Image is required";
+      newErrors.image = "Image filename is required";
     }
     if (!food.price) {
       newErrors.price = "Price is required";
@@ -75,6 +76,9 @@ const Admin = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     window.scrollTo(0,0);
+
+    if(status =="submitting") return;
+    
     setStatus("submitting");
     //const isValid = validate();
     if (!isValid) {
@@ -162,7 +166,7 @@ const Admin = () => {
           ))}
         </CheckboxList>
         <Button className="block mt-4" type="submit" variant="primary">
-          Save
+          {status === "submitting"? "Saving":"Save"}
         </Button>
       </form>
     </>
