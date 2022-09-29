@@ -225,16 +225,6 @@
         "Dinner",
         "Vegetarian"
       ]
-    },
-    {
-      "name": "BBQ Ribs",
-      "image": "fake-photo.jpg",
-      "price": "19.99",
-      "description": "Tangy and sweet",
-      "tags": [
-        "Breakfast"
-      ],
-      "id": 22
     }
   ]
 }

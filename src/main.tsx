@@ -4,20 +4,18 @@ import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import { ErrorBoundary  } from "react-error-boundary"
+import { ErrorBoundary  } from "react-error-boundary";
 
+const DevTools = React.lazy(() => import("./mocks/DevTools"));
+const useDevTools = import.meta.env.VITE_ENABLE_DEVTOOLS === "Y";
 
-if (process.env.NODE_ENV === 'development') {
-  const { worker } = await import('./mocks/browser')
-  worker.start()
-}
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundary fallback={<h1>Oops</h1>}>
       <BrowserRouter>
         <Toaster />
-        <App />
+        {useDevTools ?<DevTools/> : <App />}
       </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>
