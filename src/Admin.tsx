@@ -85,7 +85,13 @@ const Admin = () => {
       setStatus("submitted");
       return;
     }
-    await addFood(food);
+
+    try {
+      await addFood(food);
+    } catch (err) {
+      setStatus("error");
+      return;
+    }
     toast.success("Food added!👌");
     setStatus("idle");
     setFood(emptyFood);
@@ -100,6 +106,10 @@ const Admin = () => {
   const handleError = (field: keyof Errors) => {
     return status === "submitted" || touched[field] ? errors[field] : "";
   };
+
+  if (status === "error") {
+    throw new Error("Something went wrong");
+  }
 
   return (
     <>

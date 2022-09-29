@@ -1,6 +1,8 @@
+import { ErrorBoundary } from "react-error-boundary";
 import { Link, Route, Routes } from "react-router-dom";
 import Admin from "./Admin";
 import Menu from "./Menu";
+import ErrorFallback from "./shared/ErrorFallback";
 
 // Excercise:
 const App = () => (
@@ -16,10 +18,27 @@ const App = () => (
         </li>
       </ul>
     </nav>
+
+    
     <Routes>
-      <Route path="/" element={<Menu/>}/>
-      <Route path="/Admin" element={<Admin/>}/>
-    </Routes>
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Menu />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Admin />
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
   </>
 );
 
