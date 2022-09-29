@@ -6,6 +6,12 @@ import App from "./App";
 import "./index.css";
 import { ErrorBoundary  } from "react-error-boundary"
 
+
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = await import('./mocks/browser')
+  worker.start()
+}
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundary fallback={<h1>Oops</h1>}>
