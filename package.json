@@ -18,6 +18,8 @@
     "cy:open": "cypress open"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.8.0",
+    "@tanstack/react-query-devtools": "^4.8.0",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -42,6 +44,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
     "babel-loader": "^8.2.5",

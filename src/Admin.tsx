@@ -1,3 +1,4 @@
+import { useQueryClient,useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { foodTags, NewFood } from "./food";
@@ -34,12 +35,27 @@ export type Touched = {
 
 type FormStatus = "idle" | "submitting" | "submitted" | "error";
 
-
 const Admin = () => {
   const [food, setFood] = useState(emptyFood);
   const [touched, setTouched] = useState<Touched>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   //const [errors,setErrors] = useState<Errors>({});
+  const queryClient = useQueryClient();
+
+  const foodMutation = useMutation(addFood, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["foods"]);
+      toast.success("Food added!👌");
+      setStatus("idle");
+      setFood(emptyFood);
+      setTouched({});
+    },
+    onError: () =>{
+      toast.error("Error adding Food 😂");
+      setStatus("error");
+      
+    }
+  });
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -75,10 +91,10 @@ const Admin = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
 
-    if(status =="submitting") return;
-    
+    if (status == "submitting") return;
+
     setStatus("submitting");
     //const isValid = validate();
     if (!isValid) {
@@ -87,15 +103,13 @@ const Admin = () => {
     }
 
     try {
-      await addFood(food);
+      //await addFood(food);
+      foodMutation.mutate(food);
     } catch (err) {
       setStatus("error");
       return;
     }
-    toast.success("Food added!👌");
-    setStatus("idle");
-    setFood(emptyFood);
-    setTouched({});
+
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -154,7 +168,9 @@ const Admin = () => {
           value={food.image}
           error={handleError("image")}
         ></Input>
-        <CheckboxList label="Tags" error={handleError("tags")}
+        <CheckboxList
+          label="Tags"
+          error={handleError("tags")}
           //error={ status === "submitted" ? errors.tags : undefined}
         >
           {foodTags.map((tag) => (
@@ -176,7 +192,7 @@ const Admin = () => {
           ))}
         </CheckboxList>
         <Button className="block mt-4" type="submit" variant="primary">
-          {status === "submitting"? "Saving":"Save"}
+          {status === "submitting" ? "Saving" : "Save"}
         </Button>
       </form>
     </>

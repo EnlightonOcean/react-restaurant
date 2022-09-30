@@ -6,6 +6,7 @@ type ButtonProps = {
   children: React.ReactNode;
   type: "button" | "submit" | "reset";
   variant: "primary" | "secondary";
+  onClick? : () => void;
 };
 
 const variantMap = {
@@ -13,10 +14,11 @@ const variantMap = {
   secondary: "bg-gray-500 text-white",
 };
 
-const Button = ({ children, type, variant, className = "" }: ButtonProps) => (
+const Button = ({ children, type, variant, className = "",onClick }: ButtonProps) => (
   <>
     <button
       type={type}
+      onClick={onClick}
       className={clsx(
         variantMap[variant],
         className,
